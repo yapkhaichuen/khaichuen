@@ -18,6 +18,7 @@ const Blogs = defineDocumentType(() => ({
     title: { type: 'string', required: true },
     description: { type: 'string', required: true },
     updatedAt: { type: 'string', required: true },
+    opengraph: { type: 'string', required: true },
   },
   computedFields,
 }))

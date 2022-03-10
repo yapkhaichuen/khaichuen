@@ -19,7 +19,6 @@ class MyDocument extends Document {
           <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png" />
           <meta name="theme-color" content="#f9fafb" media="(prefers-color-scheme: light)" />
           <meta name="theme-color" content="#111111" media="(prefers-color-scheme: dark)" />
-          <meta property="og:image" content="/images/OGP.png" />
         </Head>
         <body className="min-w-[320px] font-sans text-black dark:text-white">
           <Main />
