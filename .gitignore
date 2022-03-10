@@ -1,0 +1,22 @@
+# dependencies
+node_modules
+
+# next.js
+.next
+
+# misc
+.DS_Store
+
+# debug
+*.log
+
+# local env files
+.env
+
+# vercel
+.vercel
+
+# contentlayer
+.contentlayer
+
+out

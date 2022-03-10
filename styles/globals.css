@@ -1,0 +1,75 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer components {
+  .btn {
+    @apply inline-flex min-w-[128px] items-center justify-center px-6 py-3;
+    @apply bg-gray-200 text-base font-medium text-black;
+    @apply dark:bg-gray-800 dark:text-white;
+    @apply rounded-md border border-transparent transition;
+    @apply hover:bg-opacity-50 dark:hover:bg-gray-700;
+    @apply focus:outline-none focus:ring-2 focus:ring-gray-300;
+    @apply disabled:cursor-not-allowed disabled:text-gray-300 disabled:dark:text-gray-400;
+  }
+}
+
+html {
+  @apply bg-gray-50;
+  min-width: 320px;
+  scroll-behavior: smooth;
+}
+
+html.dark {
+  @apply bg-gray-900;
+}
+
+body.lock-on-theme-switching {
+  @apply overflow-y-hidden;
+}
+
+:::selection {
+  color: #fefefe;
+  background-color: #47a3f3;
+}
+
+img {
+  @apply rounded-lg
+}
+
+#__next {
+  @apply bg-gray-50 dark:bg-gray-900;
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+/* https://seek-oss.github.io/capsize/ */
+.capsize::before {
+  content: '';
+  display: table;
+  margin-bottom: -0.098em;
+}
+
+.capsize::after {
+  content: '';
+  display: table;
+  margin-top: -0.219em;
+}
+
+.blink {
+  animation: blink-animation 1s steps(5, start) infinite;
+  -webkit-animation: blink-animation 1s steps(5, start) infinite;
+}
+@keyframes blink-animation {
+  to {
+    visibility: hidden;
+  }
+}
+@-webkit-keyframes blink-animation {
+  to {
+    visibility: hidden;
+  }
+}
+
+textarea, input { outline: none; }

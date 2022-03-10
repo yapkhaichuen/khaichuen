@@ -1,0 +1,44 @@
+---
+title: "WDR Paper Computer"
+description: "Paper computer that works"
+updatedAt: '2022-02-19'
+---
+
+I found this cool paper model of a computer called the WDR paper computer and I'm excited to share all about it. The WDR paper computer or Know-how Computer is an educational model of a computer consisting only of a *pen, a sheet of paper, and individual matches* in the most simple case. This allows anyone interested to learn how to program without having an electronic computer at their disposal. Source: [Wikipedia](https://en.wikipedia.org/wiki/WDR_paper_computer)
+
+## History
+The paper computer was created in the early 1980s when computer access was not yet widespread in Germany, to allow people to familiarize themselves with basic computer operation and assembly-like programming languages. It was distributed in over 400,000 copies and at its time belonged to the computers with the widest circulation.
+
+The Know-how Computer was developed by Wolfgang Back and Ulrich Rohde and was first presented in the television program WDR Computerclub in 1983. It was also published in German computer magazines.
+
+![Example](/WDR-Paper-Computer/WDR_paper_computer,_addition_program.svg "Example")
+
+## Usage
+The original printed version of the paper computer has up to 21 lines of code on the left and eight registers on the right, which are represented as boxes that contain as many matches as the value in the corresponding register.A pen is used to indicate the line of code which is about to be executed. The user steps through the program, adding and subtracting matches from the appropriate registers and following program flow until the stop instruction is encountered.
+
+The instruction set of five commands is small but [Turing complete](https://en.wikipedia.org/wiki/Turing_completeness) and therefore enough to represent all mathematical functions making it a complete computer:
+
+| Syntax | Definition                                                      |
+|--------|-----------------------------------------------------------------|
+| inc [reg] | Increases the specified register by one and the program counter by one.                                                    |
+| dec [reg] | Decreases the specified register by one and increases the program counter by one. Because there can be no less than zero matches in a register, the value is then left unchanged.                                                    |
+| jmp [addr]| Sets the program pointer to the specified address.                                              |
+| isz [reg] | Checks the contents of the specified register to zero. If it contains zero, the program counter is increased by two, otherwise only by one. So, if there is a zero, the following command is skipped. |
+| stp       | Stops the paper computer. The program is finished.                                          |
+
+Here are some sample programs that you could try to run on the paper computer, you can download it [here](https://github.com/ProgrammingCube/5-Instruction-Computer/tree/main/examples/simple%20arithmetic) from ProgrammingCube's GitHub repository. This video here by [Chris Staecker](https://www.youtube.com/watch?v=Z27KQiBnkJI) is a great introduction to the paper computer.
+
+## Emulators
+An emulator for Windows is available on Wolfgang Back's website, but a JavaScript emulator also exists. Emulators place fewer restrictions on line count or the number of registers, allowing longer and more complex programs.
+
+| Emulators                                                                           | Programming Language |
+|-------------------------------------------------------------------------------------|----------------------|
+| [5-Instruction Computer](https://github.com/ProgrammingCube/5-Instruction-Computer) | Python               |
+| [Papier-Computer](https://marian-aldenhoevel.de/papiercomputer/)                    | JavaScript           |
+
+The paper computer's method of operation is nominally based on a register machine by Elmar Cohors-Fresenborg, but follows more the approach of John Cedric Shepherdson and Howard E. Sturgis in their Shepherdson–Sturgis register machine model.
+
+## Why use it?
+The first reason I love using the paper computer because I like to think of it as a board game. Unfortunately, we are not allowed to bring any devices to school, hence the WDR Paper Computer is a great way to pass time.
+
+The second reason I think most people should try it is because it is a very simple and fun way to learn programming. It is also a good opportunity to practice basic concepts without the need for a computer.

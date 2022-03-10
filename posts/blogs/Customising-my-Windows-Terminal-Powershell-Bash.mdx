@@ -1,0 +1,73 @@
+---
+title: "Customising my Windows Terminal - Powershell/Bash"
+description: "My PowerShell prompt with Oh My Posh and Windows Terminal"
+updatedAt: '2022-05-28'
+---
+
+It is a deep passion of mine to build my ultimate terminal, getting the prompt just right, combining colors, fonts, glyphs and more into a gorgeous CLI prompt. I've used OhMyPosh together with PowerShell and Windows Terminal, but I'll show you how to get it working in Bash in Linux (Ubuntu) through WSL2. Hope you enjoy customising your prompt as much as I did.
+
+I ❤ my prompt.
+
+----
+
+## Choice of shell
+My choice of shell is PowerShell, the latest .NET Core powered PowerShell 7, not the classical Windows PowerShell. I've also used Bash in Linux (Ubuntu) through WSL2 but we'll get to that later. To install PowerShell, you can download it here at [Microsoft Store](https://www.microsoft.com/en-us/p/powershell/9mz1snwt0n5d?cid=msft_web_chart&activetab=pivot:overviewtab) or alternatively you can get it with the [Winget package manager](https://docs.microsoft.com/en-us/powershell/scripting/install/installing-powershell-on-windows?view=powershell-7.2#install-powershell-using-winget).
+
+```ShellSession
+winget install Microsoft.PowerShell
+```
+
+## Setting up Windows Terminal
+Note: Windows Terminal should be installed on a Windows 11 machine by default. If you're on Windows 11, you can skip this section. If you're on Windows 10, you'll need to install the [Windows Terminal](https://www.microsoft.com/store/productId/9N0DX20HK701) package on the Microsoft Store. Check out the [GitHub releases page](https://github.com/microsoft/terminal/releases) if you want to build from source yourself.
+
+Once you have Windows Terminal setup, you can proceed to set up your default shell (in my case it's PowerShell) and whether you want to use Windows Terminal as the deault console application replacing CMD.
+
+![Windows Terminal default profile](/Customising-my-Windows-Terminal-Powershell-Bash/Windows-Terminal.png "Windows Terminal default profile")
+
+## Fonts & Glyphs
+Windows Terminal comes with Cascadia Code by default which is a great font but it lacks a few things. Let me show you what I mean.
+
+> Before you proceed, this issue usually happens after installing OhMyPosh, but I want to give you some heads up.
+
+![Bad font](/Customising-my-Windows-Terminal-Powershell-Bash/bad-font.png "Bad font")
+
+This is what will happen if you use Cascadia Code with OhMyPosh, it will look horrible and all the cool visuals are dislocated and mashed together. This is because Cascadia Code is missing a few glyphs. It means some of the characters you see in the terminal are missing because OhMyPosh uses glyphs to display segments in the prompt. To solve this, we have to use a Nerd Font which is a font that include hundreds of special characters that you can use to make your prompt cooler. I've chosen to use [JetBrains Mono NL Nerd Font](https://www.jetbrains.com/lp/mono/) which is a free to use font with all of the glyphs needed for OhMyPosh. Alternatively, you can check out other Nerd fonts [here](https://www.nerdfonts.com/).
+
+Once you have the Nerd Font installed, you can install it on Windows Terminal. You can do this by going to the Windows Terminal settings and clicking on the "Font face" tab.
+
+## Other Windows Terminal Settings
+Windows Terminal comes with a few other settings that you can change. I had changed the arcylic opacity for the background of the terminal to be transparent. Most of the settings can be changed in the graphics interface at the "Settings" tab. However, if you like getting your hands wet with code, you can directly change the settings in the JSON file at "Open JSON file".
+
+![Arcylic](/Customising-my-Windows-Terminal-Powershell-Bash/transparent.png "Arcylic")
+
+Arcylic looks good doesn't it.
+
+## Adding OhMyPosh to Windows Terminal
+[Oh My Posh](https://ohmyposh.dev/docs/) custom prompt engine for any shell that has the ability to adjust the prompt string with a function or variable. Check out the documentation, it's really good and easy to understand.
+
+I'll use Winget to install OhMyPosh.
+
+```ShellSession
+winget install JanDeDobbeleer.OhMyPosh
+```
+
+In order to have theming, you must have a JSON file which in this case, the default theme jandedobbeleer.omp.json is usually located in *C:\Users\AppData\Local\Programs\oh-my-posh\themes*. Navigate to your PowerShell folder, which might be in *C:\Users\Documents\PowerShell*, create a new file called "profile.ps1" and paste the following code, note that the file locations may not be the same as yours:
+
+```PowerShell
+oh-my-posh --init --shell pwsh --config $env:POSH_THEMES_PATH/jandedobbeleer.omp.json | Invoke-Expression
+```
+
+This tells PowerShell to use the OhMyPosh theme on startup. You can use the "--config" option to specify a different theme, I have made my own theme titled khaichuen.json and put it in the same folder as the OhMyPosh theme. I've stored the JSON code for my theme on [GitHub Gist](https://gist.github.com/yapkhaichuen/d3b95e75328d51d7bc65832b182058e9), so you can check it out yourself if you want.
+
+Save the files and restart your shell. Once you get it all done, you should be able to start using it. Here's my implementation of the OhMyPosh prompt:
+
+![Implementation](/Customising-my-Windows-Terminal-Powershell-Bash/implementation1.png "Implmentation")
+
+----
+## Bash on WSL2
+For Bash on WSL2 or any Linux Distros, I'll use the same approach as above but with the following code in the *.bashrc* file usually located in the home directory of the user. Be sure to install OhMyPosh on your linux machine first before doing any changes to the *.bashrc* file, check out the installation guide [here](https://ohmyposh.dev/docs/linux).
+
+```shell
+eval "$(oh-my-posh --init --shell bash --config ~/jandedobbeleer.omp.json)"
+```
+It shouldn't be much different from the PowerShell implementation. I've even linked all my custom JSON theme on a OneDrive folder, no matter which device or shell or terminal I'm on, I can always access it. Happy customising! Leave a comment down below if you've faced any issues, I'll be happy to help.

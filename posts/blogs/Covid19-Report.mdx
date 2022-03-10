@@ -1,0 +1,243 @@
+---
+title: "Daily Covid Report"
+description: "Generates a simple report about the current Covid-19 cases and deaths in Malaysia"
+updatedAt: '2022-02-19'
+---
+
+This project aims to generate a simple report about the current Covid-19 cases and deaths in Malaysia. Results are delayed by one day, data is provided by the Ministry of Health Malaysia Covid-19 public data. For the finished report, please refer to my [Github repository](https://github.com/yapkhaichuen/Daily-Covid-Report).
+
+---
+
+## Introduction
+Normally, to see the Covid-19 numbers of my country (Malaysia), I would go to the [Malaysian Government Covid Now website](https://covidnow.moh.gov.my/) and look at the latest data. However, the data is quite confusing and too much details are provided. Hence, I decided to generate a simple report about the current Covid-19 cases and deaths in Malaysia. The report is really simple and easy to understand with a few numbers and straightforward graphs.
+
+This are the few things to include in the report:
+1. Daily confirmed cases
+2. Daily deaths
+3. Daily recovered
+4. Updated and generated date/time
+
+I'll make a Python script to generate the report and upload a JSON file to my Github repository. The script will also generate a simple visualization of the data. The Python file will run with GitHub Actions. The JSON file will write itself onto a table in the README.md markdown file with [Markdown Autodocs](https://github.com/dineshsonachalam/markdown-autodocs#readme). Everything is ran on GitHub Actions and the GitHub repository. Sounds confusing? Great, let's start!
+## Data
+The data is provided by the Ministry of Health Malaysia Covid-19 public data at [GitHub](https://github.com/MoH-Malaysia/covid19-public). The data is in a CSV format and is updated daily at 2359 hours. To use it, I decided to use the GitHub raw content to link the data.
+
+![GitHub Raw](/Covid19-Report/github_raw.png "GitHub Raw")
+
+## Tools
+I'll use the following tools to generate the report:
+1. [Python](https://www.python.org)
+2. [Pandas](https://pandas.pydata.org/)
+3. [Matplotlib](https://matplotlib.org/)
+4. [GitHub Actions](https://github.com/features/actions)
+5. [Markdown Autodocs](https://github.com/dineshsonachalam/markdown-autodocs#readme)
+6. [GitHub Pages](https://pages.github.com/)
+
+## Process
+1. Import the data from the CSV file
+2. GitHub Actions generates the report into a JSON file
+3. GitHub Actions generates the visualization
+4. GitHub Actions writes the JSON data into a table in the README.md markdown file
+5. GitHub Pages generates and displays the report into a HTML file
+
+## Python Code
+I've tested this out on my local machine on Python 3.10 but it should work on any Python 3.x version. This is for pulling the data and cleaning it as well as exporting it into a JSON file as data.json. The file is named *main.py* in the repo.
+
+```python
+# Import libraries
+import pandas as pd
+import datetime
+import json
+import pytz
+
+# New Case Data
+cases_url = "https://raw.githubusercontent.com/MoH-Malaysia/covid19-public/main/epidemic/cases_malaysia.csv"
+col_list = ["date", "cases_new"]
+cases_df = pd.read_csv(cases_url, usecols=col_list)
+cases_today = cases_df.tail(n=1)
+case_results = int(cases_today.cases_new)
+
+# Death Data
+death_url = "https://raw.githubusercontent.com/MoH-Malaysia/covid19-public/main/epidemic/deaths_malaysia.csv"
+col_list = ["date", "deaths_new"]
+death_df = pd.read_csv(death_url, usecols=col_list)
+death_today = death_df.tail(n=1)
+death_results = int(death_today.deaths_new)
+
+# Recovery Data
+recovery_url = "https://raw.githubusercontent.com/MoH-Malaysia/covid19-public/main/epidemic/cases_malaysia.csv"
+col_list = ["date", "cases_recovered"]
+recovery_df = pd.read_csv(recovery_url, usecols=col_list)
+recovery_today = recovery_df.tail(n=1)
+recovery = int(recovery_today.cases_recovered)
+
+# Mount date
+date_dirty = str(death_today.date)[-36:]
+date_current = date_dirty[:-26]
+
+# Current time of process for server to log. Malaysian time for refrence
+KL = pytz.timezone('Asia/Kuala_Lumpur')
+current_time = str(datetime.datetime.now(KL))
+
+# Summary function
+def short_summary():
+      summary = [
+            {
+            "country": "Malaysia",
+            "last updated": date_current,
+            "cases": case_results,
+            "deaths": death_results,
+            "recovery": recovery,                  
+            "generated": current_time
+      }
+      ]
+      """save data to json file"""
+      with open('data.json', 'w') as outfile:
+            json.dump(summary, outfile, indent=4, sort_keys=False)
+      return summary
+
+# Call function
+short_summary()
+```
+## Visualization Code
+This Python script generates three graphs from the data. The graphs are: cases, deaths, and recovery. The file is named *visual.py* in the repo.
+
+```python
+from turtle import color
+import pandas as pd
+from matplotlib import pyplot as plt
+
+# Mount cases data
+cases_url = "https://raw.githubusercontent.com/MoH-Malaysia/covid19-public/main/epidemic/cases_malaysia.csv"
+col_list = ["date", "cases_new"]
+cases_df = pd.read_csv(cases_url, usecols=col_list)
+cases_today = cases_df
+
+# Mount death data
+death_url = "https://raw.githubusercontent.com/MoH-Malaysia/covid19-public/main/epidemic/deaths_malaysia.csv"
+col_list = ["date", "deaths_new"]
+death_df = pd.read_csv(death_url, usecols=col_list)
+death_today = death_df
+
+# Mount recovery data
+recovery_url = "https://raw.githubusercontent.com/MoH-Malaysia/covid19-public/main/epidemic/cases_malaysia.csv"
+col_list = ["date", "cases_recovered"]
+recovery_df = pd.read_csv(recovery_url, usecols=col_list)
+recovery = recovery_df
+
+# Case Plot configurations
+x1 = cases_today.date
+y1 = cases_today.cases_new
+plt.figure(figsize=(10,3)) 
+plt.plot(x1, y1, linestyle = 'dashed')
+plt.axis('off')
+plt.savefig('./graphs/cases_graph.png', transparent=True, bbox_inches='tight')
+
+# Death Plot configurations
+x2 = death_today.date
+y2 = death_today.deaths_new
+plt.figure(figsize=(10,3)) 
+plt.plot(x2, y2, linestyle = 'dashed', color="red")
+plt.axis('off')
+plt.savefig('./graphs/deaths_graph.png', transparent=True, bbox_inches='tight')
+
+# Recovery Plot configurations
+x2 = recovery.date
+y2 = recovery.cases_recovered
+plt.figure(figsize=(10,3)) 
+plt.plot(x2, y2, linestyle = 'dashed', color="green")
+plt.axis('off')
+plt.savefig('./graphs/recovery_graph.png', transparent=True, bbox_inches='tight')
+```
+
+## GitHub Actions
+The GitHub Actions workflow runs the Python script and generates the report and visualization. The report will be in a JSON format and the visualization will be in a PNG file. GitHub Actions (Markdown Autodocs) will also write the JSON data into a table in the README.md markdown file. The GitHub Actions workflow is in *.github/workflows/generate_report.yml*.
+
+```yaml
+name: Generate Report
+
+on:
+  push:
+    branches: [ main ]
+  schedule:
+    - cron: "*/30 * * * *"
+  workflow_dispatch:
+
+jobs:
+  build:
+
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v2
+    - name: Set up Python 3.10
+      uses: actions/setup-python@v2
+      with:
+        python-version: "3.10"
+    - name: Install dependencies
+      run: |
+        python -m pip install --upgrade pip
+        pip install flake8 pytest
+        if [ -f requirements.txt ]; then pip install -r requirements.txt; fi
+    - name: Lint with flake8
+      run: |
+        # stop the build if there are Python syntax errors or undefined names
+        flake8 . --count --select=E9,F63,F7,F82 --show-source --statistics
+        # exit-zero treats all errors as warnings. The GitHub editor is 127 chars wide
+        flake8 . --count --exit-zero --max-complexity=10 --max-line-length=127 --statistics
+    - name: Execute Python script
+      run: |
+        python3 main.py
+        python3 visual.py
+      env:
+        ACCESS_TOKEN: ${{ secrets.ACCESS_TOKEN }}
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        EXCLUDED: ${{ secrets.EXCLUDED }}
+        EXCLUDED_LANGS: ${{ secrets.EXCLUDED_LANGS }}
+        COUNT_STATS_FROM_FORKS: ${{ secrets.COUNT_STATS_FROM_FORKS }}
+      
+
+    # Commits all changed files to the repository
+    - name: Commit to the output branch of repo
+      run: |
+        git config --global user.name "github-actions[bot]"
+        git config --global user.email "41898282+github-actions[bot]@users.noreply.github.com"
+        git add .
+        git commit -m 'Generated Report' || echo
+        git push
+        # "echo" returns true so the build succeeds, even if no changed files
+        git commit -m 'Generated Report' || echo
+        git push
+        
+    - name: Markdown autodocs
+      uses: dineshsonachalam/markdown-autodocs@v1.0.4
+      with:
+    # Optional, defaults to author of the commit that triggered the run
+        commit_author: Author <github-actions[bot]>
+
+    # Optional, defaults to "actions@github.com"
+        commit_user_email: 41898282+github-actions[bot]@users.noreply.github.com
+
+    # Optional, but recommended
+    # Defaults to "Apply automatic changes"
+        commit_message: Report generated to README
+        branch: main
+
+    # Optional output file paths, defaults to '[./README.md]'.
+        output_file_paths: '[README.md]'
+
+    # Categories to automatically sync or transform its contents in the markdown files.
+    # Defaults to '[code-block,json-to-html-table,workflow-artifact-table]'
+        categories: '[code-block,json-to-html-table,workflow-artifact-table]'
+
+```
+## GitHub Pages
+The GitHub Pages will generate and display the report into a HTML file. Check out the deployment here:
+[Daily Covid-19 Report](https://yapkhaichuen.github.io/Daily-Covid-Report/)
+
+## Extra Stuff
+To make my viewing of the data even easier, I configured it to run on my iPhone with Shortcuts. (A scripting tool for compatible Apple devices) If you want to use it on your Mac/iPhone/Apple Watch, you can download it here: [Covid-19 information Apple Shortcut](https://www.icloud.com/shortcuts/77bf8a1a406e437fa939d172f28f987b). It can be triggered with Siri by saying "Covid-19" or pressing the button in the Shortcuts shelf widget.
+
+## Conclusion
+Here is the end result. Everything can be found on [my repo](), how you enjoy my little project. Leave a comment if you have something to add that can make it better. Give it a little star if you like it.
+
+![Results](/Covid19-Report/result.png "Results")
