@@ -13,7 +13,7 @@ async function generate() {
     feed.item({
       title: post.title,
       url: `https://khaichuen.vercel.app/blog/${post.slug}`,
-      date: post.publishedAt,
+      pubDate: post.publishedAt,
       description: post.summary
     });
   });
