@@ -8,7 +8,7 @@ export default function Comment() {
 
   return (
     <Giscus
-      repo="yapkhaichuen/Personal-Site"
+      repo="yapkhaichuen/khaichuen"
       repoId="R_kgDOG-Do6Q"
       category="General"
       categoryId="DIC_kwDOG-Do6c4COA2p"
