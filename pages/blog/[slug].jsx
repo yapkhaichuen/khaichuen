@@ -35,8 +35,9 @@ export default function Blog({ blog }) {
     <BlogLayout blog={blog}>
       <Head>
         <title>{blog.title}</title>
+        <meta property="og:image" content={blog.opengraph} />
         <meta content={blog.description} name="description" />
-        <meta property="og:title" content={`${blog.title} - Jay`} />
+        <meta property="og:title" content={`${blog.title} | Khai Chuen`} />
       </Head>
       <article>
         <Component components={{ Image: RoundedImage }} />

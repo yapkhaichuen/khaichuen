@@ -24,7 +24,7 @@ export default function Blog({ allBlogs }) {
       <Head>
         <title>Khai Chuen | {metaTitle}</title>
         <meta content={metaDesc} name="description" />
-        <meta property="og:title" content={`${metaTitle} - Jay`} />
+        <meta property="og:title" content={`${metaTitle}`} />
       </Head>
       <Container>
         <div className="mx-auto mb-16 flex max-w-2xl flex-col items-start justify-center">
