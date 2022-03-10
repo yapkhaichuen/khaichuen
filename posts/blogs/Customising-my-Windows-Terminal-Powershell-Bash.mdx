@@ -2,7 +2,7 @@
 title: "Customising my Windows Terminal - Powershell/Bash"
 description: "My PowerShell prompt with Oh My Posh and Windows Terminal"
 updatedAt: '2022-05-28'
-opengraph: '/Customising-my-Windows-Terminal-Powershell-Bash/head.png'
+opengraph: '/content/Customising-my-Windows-Terminal-Powershell-Bash/head.png'
 ---
 
 It is a deep passion of mine to build my ultimate terminal, getting the prompt just right, combining colors, fonts, glyphs and more into a gorgeous CLI prompt. I've used OhMyPosh together with PowerShell and Windows Terminal, but I'll show you how to get it working in Bash in Linux (Ubuntu) through WSL2. Hope you enjoy customising your prompt as much as I did.
@@ -23,14 +23,14 @@ Note: Windows Terminal should be installed on a Windows 11 machine by default. I
 
 Once you have Windows Terminal setup, you can proceed to set up your default shell (in my case it's PowerShell) and whether you want to use Windows Terminal as the deault console application replacing CMD.
 
-![Windows Terminal default profile](/Customising-my-Windows-Terminal-Powershell-Bash/Windows-Terminal.png "Windows Terminal default profile")
+![Windows Terminal default profile](content/Customising-my-Windows-Terminal-Powershell-Bash/Windows-Terminal.png "Windows Terminal default profile")
 
 ## Fonts & Glyphs
 Windows Terminal comes with Cascadia Code by default which is a great font but it lacks a few things. Let me show you what I mean.
 
 > Before you proceed, this issue usually happens after installing OhMyPosh, but I want to give you some heads up.
 
-![Bad font](/Customising-my-Windows-Terminal-Powershell-Bash/bad-font.png "Bad font")
+![Bad font](/content/Customising-my-Windows-Terminal-Powershell-Bash/bad-font.png "Bad font")
 
 This is what will happen if you use Cascadia Code with OhMyPosh, it will look horrible and all the cool visuals are dislocated and mashed together. This is because Cascadia Code is missing a few glyphs. It means some of the characters you see in the terminal are missing because OhMyPosh uses glyphs to display segments in the prompt. To solve this, we have to use a Nerd Font which is a font that include hundreds of special characters that you can use to make your prompt cooler. I've chosen to use [JetBrains Mono NL Nerd Font](https://www.jetbrains.com/lp/mono/) which is a free to use font with all of the glyphs needed for OhMyPosh. Alternatively, you can check out other Nerd fonts [here](https://www.nerdfonts.com/).
 
@@ -39,12 +39,12 @@ Once you have the Nerd Font installed, you can install it on Windows Terminal. Y
 ## Other Windows Terminal Settings
 Windows Terminal comes with a few other settings that you can change. I had changed the arcylic opacity for the background of the terminal to be transparent. Most of the settings can be changed in the graphics interface at the "Settings" tab. However, if you like getting your hands wet with code, you can directly change the settings in the JSON file at "Open JSON file".
 
-![Arcylic](/Customising-my-Windows-Terminal-Powershell-Bash/transparent.png "Arcylic")
+![Arcylic](/content/Customising-my-Windows-Terminal-Powershell-Bash/transparent.png "Arcylic")
 
 Arcylic looks good doesn't it.
 
 ## Adding OhMyPosh to Windows Terminal
-[Oh My Posh](https://ohmyposh.dev/docs/) custom prompt engine for any shell that has the ability to adjust the prompt string with a function or variable. Check out the documentation, it's really good and easy to understand.
+[Oh My Posh](https://ohmyposh.dev/docs/) is a custom prompt engine for any shell that has the ability to adjust the prompt string with a function or variable. Check out the documentation, it's really good and easy to understand.
 
 I'll use Winget to install OhMyPosh.
 
@@ -62,7 +62,7 @@ This tells PowerShell to use the OhMyPosh theme on startup. You can use the "--c
 
 Save the files and restart your shell. Once you get it all done, you should be able to start using it. Here's my implementation of the OhMyPosh prompt:
 
-![Implementation](/Customising-my-Windows-Terminal-Powershell-Bash/implementation1.png "Implmentation")
+![Implementation](/content/Customising-my-Windows-Terminal-Powershell-Bash/implementation1.png "Implmentation")
 
 ----
 ## Bash on WSL2
