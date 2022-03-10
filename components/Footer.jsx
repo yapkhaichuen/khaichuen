@@ -24,7 +24,9 @@ export default function Footer() {
         <div className="flex flex-col space-y-4">
           <ExternalLink href="https://github.com/yapkhaichuen">GitHub</ExternalLink>
           <ExternalLink href="https://www.twitter.com/KhaiYap">Twitter</ExternalLink>
+          <a className="text-gray-500 transition hover:text-gray-700 dark:text-gray-400 dark:hover:text-gray-200" href="/feed.xml">RSS feed</a>
         </div>
+
 
       </div>
     </footer>

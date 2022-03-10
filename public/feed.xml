@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?><rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom" version="2.0">
+    <channel>
+        <title><![CDATA[Khai Chuen]]></title>
+        <description><![CDATA[Khai Chuen]]></description>
+        <link>https://khaichuen.vercel.app</link>
+        <generator>RSS for Node</generator>
+        <lastBuildDate>Thu, 10 Mar 2022 11:50:11 GMT</lastBuildDate>
+        <atom:link href="https://khaichuen.vercel.app/feed.xml" rel="self" type="application/rss+xml"/>
+        <item>
+            <title><![CDATA[Daily Covid Report]]></title>
+            <link>https://khaichuen.vercel.app/blog/Covid19-Report</link>
+            <guid isPermaLink="true">https://khaichuen.vercel.app/blog/Covid19-Report</guid>
+        </item>
+        <item>
+            <title><![CDATA[Customising my Windows Terminal - Powershell/Bash]]></title>
+            <link>https://khaichuen.vercel.app/blog/Customising-my-Windows-Terminal-Powershell-Bash</link>
+            <guid isPermaLink="true">https://khaichuen.vercel.app/blog/Customising-my-Windows-Terminal-Powershell-Bash</guid>
+        </item>
+        <item>
+            <title><![CDATA[Starting a new personal blog!]]></title>
+            <link>https://khaichuen.vercel.app/blog/Starting-new-personal-blog</link>
+            <guid isPermaLink="true">https://khaichuen.vercel.app/blog/Starting-new-personal-blog</guid>
+        </item>
+        <item>
+            <title><![CDATA[WDR Paper Computer]]></title>
+            <link>https://khaichuen.vercel.app/blog/WDR-Paper-Computer</link>
+            <guid isPermaLink="true">https://khaichuen.vercel.app/blog/WDR-Paper-Computer</guid>
+        </item>
+    </channel>
+</rss>
