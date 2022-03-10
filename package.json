@@ -1,8 +1,9 @@
 {
-  "name": "portfolio",
+  "name": "khaichuen",
   "version": "1.1.5",
-  "description": "My portfolio built with Next.js, Tailwind CSS, MDX and Vercel.",
-  "license": "GPL-3.0+",  "scripts": {
+  "description": "MDX + Vercel + Next.js+ TailwindCSS + Prisma",
+  "license": "GPL-3.0+",
+  "scripts": {
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
